@@ -25,6 +25,12 @@ public class MapGenerator : MonoBehaviour
 
     public void Start()
     {
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    }
+
+    void OnNewWave(int waveNumber)
+    {
+        mapIndex = waveNumber - 1;
         GenerateMap();
     }
 
@@ -148,6 +154,17 @@ public class MapGenerator : MonoBehaviour
     Vector3 CoordToPosition(int x, int y)
     {
         return new Vector3(-currentMap.mapSize.x / 2f + 0.5f + x, 0, -currentMap.mapSize.y / 2f + 0.5f + y) * tileSize;
+    }
+
+    //We can get the position with the coord, as above, now we want to do the opposite, so we can see where the player is standing
+    public Transform GetTileFromPosition(Vector3 position)
+    {
+        int x = Mathf.RoundToInt(position.x /tileSize + (currentMap.mapSize.x - 1) / 2f);
+        int y = Mathf.RoundToInt(position.z / tileSize + (currentMap.mapSize.y - 1) / 2f);
+        x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
+        y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
+
+        return tileMap[x, y];
     }
 
     bool MapIsFullyAccessible(bool[,] obsticleMap, int currentObsticleCount)
