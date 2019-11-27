@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : LivingEntity
 {
-
+    /*test*/
     public enum State { Idle, Chasing, Attacking };
     State currentState;
 
