@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23247127319489008}
   - component: {fileID: 65067750731660536}
   - component: {fileID: 208629635271462814}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Obsticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

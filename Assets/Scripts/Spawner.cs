@@ -47,6 +47,11 @@ public class Spawner : MonoBehaviour
         playerEntity.OnDead += OnPlayerDeath;
     }
 
+    void ResetPlayerPosition()
+    {
+        playerTransform.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+    }
+
     void NextWave()
     {
         currentWaveNumber++;
@@ -60,6 +65,7 @@ public class Spawner : MonoBehaviour
             {
                 OnNewWave(currentWaveNumber);
             }
+            ResetPlayerPosition();
         }
     }
 

@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour {
         if (initialCollisions.Length > 0)
         {
             //will use a collider instead of a ray, so we have to use the OnHitObject with a collider below
-            OnHitObject(initialCollisions[0]);
+            OnHitObject(initialCollisions[0], transform.position);
         }
     }
 
@@ -42,11 +42,11 @@ public class Projectile : MonoBehaviour {
 
         if(Physics.Raycast(ray, out hit, moveDistance + skinWidth, collisionMask))
         {
-            OnHitObject(hit);
+            OnHitObject(hit.collider, hit.point);
         }
     }
 
-    void OnHitObject(RaycastHit hit)
+  /*  void OnHitObject(RaycastHit hit)
     {
         //since we don't know what we're hitting, we use the interface for a damageable object
         IDamageable damageableObject = hit.collider.gameObject.GetComponent<IDamageable>();
@@ -57,16 +57,19 @@ public class Projectile : MonoBehaviour {
         }
         Destroy(gameObject);
 
-    }
+    }*/
+
+
 
     //same as above but to deal with that initial collider issue, since the ray won't see the enemy, the
     //overlap method returns a collider, which we use here
-    void OnHitObject(Collider c)
+    //updated later: removed the raycast method entirely and added vector3 to this method ->
+    void OnHitObject(Collider c, Vector3 hitPoint)
     {
         IDamageable damageableObject = c.gameObject.GetComponent<IDamageable>();
         if (damageableObject != null)
         {
-            damageableObject.TakeDamage(damage);
+            damageableObject.TakeHit(damage, hitPoint, transform.forward);
             
         }
         Destroy(gameObject);

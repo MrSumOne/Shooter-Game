@@ -14,6 +14,8 @@ public class Enemy : LivingEntity
     Material enemyMat;
     Color originalColor;
 
+    public ParticleSystem deathEffect;
+
     LivingEntity targetEntity;
 
     float attackDistanceThreshold = .5f;
@@ -51,6 +53,15 @@ public class Enemy : LivingEntity
 
             StartCoroutine(UpdatePath());
         }
+    }
+
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        if(damage >= health)
+        {
+            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.main.startLifetime.constant);
+        }
+        base.TakeHit(damage, hitPoint, hitDirection);
     }
 
     void OnTargetDeath()

@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
+  deathEffect: {fileID: 198924846099974742, guid: 117e38263792e3d49a0ff5d531098a9c,
+    type: 2}
   timeBetweenAttacks: 0.5
   damage: 1
 --- !u!136 &136813239895113914
