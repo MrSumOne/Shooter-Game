@@ -4,6 +4,8 @@
 [RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
+    public Crosshairs crosshairs;
+
     public float playerSpeed;
     Rigidbody playerRigidbody;
     
@@ -32,7 +34,12 @@ public class Player : LivingEntity
 
         if (Input.GetMouseButton(0))
         {
-            gunController.Shoot();
+            gunController.OnTriggerHold();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            gunController.OnTriggerRelease();
         }
     }
 
@@ -45,7 +52,7 @@ public class Player : LivingEntity
         //ray from camera towards mouse poisiton to inifinity
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         //new basic plane, like the one we have in the scene, that goes out on x and z forever
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
         float rayDistance;
 
         //if there's a intersection between ray and the plane, giving out the distance between the two
@@ -56,6 +63,9 @@ public class Player : LivingEntity
             //Debug.DrawLine(ray.origin, pointOfIntersection, Color.red);
             //add the player's height to the point, so he doesn't point downwards
             heightCorrectedPoint = new Vector3(pointOfIntersection.x, transform.position.y, pointOfIntersection.z);
+
+            crosshairs.transform.position = pointOfIntersection;
+            crosshairs.DetectTargets(ray);
         }
 
         //this will work to, but it will only draw the ray when it collides with something, and gives out hitInfo

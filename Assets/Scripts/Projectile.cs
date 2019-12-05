@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour {
     float lifetime = 3;
     float skinWidth = .1f;
 
+    //public Color trailColour;
+
     public LayerMask collisionMask;
 
     private void Start()
@@ -21,6 +23,7 @@ public class Projectile : MonoBehaviour {
             //will use a collider instead of a ray, so we have to use the OnHitObject with a collider below
             OnHitObject(initialCollisions[0], transform.position);
         }
+        //GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColour);
     }
 
     public void SetSpeed(float newSpeed)

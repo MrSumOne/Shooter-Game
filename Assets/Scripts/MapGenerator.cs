@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     public Vector2 maxMapSize;
     public Transform obsticlePrefab;
     public Transform navmeshFloor;
+    public Transform mapFloor;
     public Transform navmeshMaskPrefab;
 
     [Range(0, .3f)]
@@ -38,9 +39,7 @@ public class MapGenerator : MonoBehaviour
     {
         currentMap = maps[mapIndex];
 
-        System.Random prng = new System.Random(currentMap.seed);
-
-        GetComponent<BoxCollider>().size = new Vector3(currentMap.mapSize.x * tileSize, 0.05f, currentMap.mapSize.y * tileSize);
+        System.Random prng = new System.Random(currentMap.seed); 
 
         tileMap = new Transform[currentMap.mapSize.x,currentMap.mapSize.y];
 
@@ -129,6 +128,7 @@ public class MapGenerator : MonoBehaviour
 
         //changing the size of the navmesh
         navmeshFloor.localScale = new Vector3(maxMapSize.x, maxMapSize.y) * tileSize;
+        mapFloor.localScale = new Vector3(currentMap.mapSize.x * tileSize, currentMap.mapSize.y * tileSize);
 
         //create navmesh borders
         Transform maskLeft = Instantiate(navmeshMaskPrefab, Vector3.left * (currentMap.mapSize.x + maxMapSize.x) / 4f * tileSize, Quaternion.identity) as Transform;

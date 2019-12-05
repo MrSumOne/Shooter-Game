@@ -28,7 +28,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1073793854694488
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -125,6 +125,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1622478415398080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4400357048940854}
+  m_Layer: 0
+  m_Name: Projectile Spawn 01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1657692434341398
 GameObject:
   m_ObjectHideFlags: 1
@@ -168,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4235490208311764}
   m_Layer: 0
-  m_Name: Muzzle
+  m_Name: Projectile Spawn 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,14 +237,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722639798261550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.084, y: 0, z: 0.662}
+  m_LocalRotation: {x: 0, y: 0.077241085, z: 0, w: 0.99701244}
+  m_LocalPosition: {x: -0.055999994, y: 0, z: 0.66199994}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4968933891825420}
+  m_Children: []
   m_Father: {fileID: 4613499039610538}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 8.86, z: 0}
 --- !u!4 &4332369631096212
 Transform:
   m_ObjectHideFlags: 1
@@ -243,6 +257,19 @@ Transform:
   m_Father: {fileID: 4968933891825420}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!4 &4400357048940854
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622478415398080}
+  m_LocalRotation: {x: 0, y: -0.077241085, z: 0, w: 0.99701244}
+  m_LocalPosition: {x: -0.15999997, y: 0, z: 0.66199994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4613499039610538}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -8.86, z: 0}
 --- !u!4 &4577320157527002
 Transform:
   m_ObjectHideFlags: 1
@@ -276,12 +303,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094119119527910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 1.041, z: 0.3}
+  m_LocalPosition: {x: 1.5154829, y: 1.44, z: 1.1203566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4235490208311764}
+  - {fileID: 4968933891825420}
   - {fileID: 4761246007514718}
   - {fileID: 4609004966174126}
+  - {fileID: 4400357048940854}
+  - {fileID: 4235490208311764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,14 +362,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1073793854694488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.08399999, y: 0, z: 0.66199994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4148177626346954}
   - {fileID: 4332369631096212}
   - {fileID: 4577320157527002}
-  m_Father: {fileID: 4235490208311764}
+  m_Father: {fileID: 4613499039610538}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23023285478091620
@@ -553,11 +582,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37329499877f619479360d4d9898a40c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 4235490208311764}
+  firemode: 0
+  projectileSpawn:
+  - {fileID: 4400357048940854}
+  - {fileID: 4235490208311764}
   projectile: {fileID: 114707204351084538, guid: 5776cab80ae1ed145a1aa755b1a5ebab,
     type: 2}
   msBetweenShots: 100
   muzzleVelocity: 35
+  burstCount: 5
   shell: {fileID: 4791208050625788, guid: 8382999cc6b1a2441954ca7627114d6b, type: 2}
   shellEjection: {fileID: 4609004966174126}
 --- !u!114 &114937504289208208
