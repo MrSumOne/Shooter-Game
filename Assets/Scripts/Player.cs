@@ -41,6 +41,10 @@ public class Player : LivingEntity
         {
             gunController.OnTriggerRelease();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gunController.Reload();
+        }
     }
 
     void GetPlayerControls()
@@ -66,6 +70,11 @@ public class Player : LivingEntity
 
             crosshairs.transform.position = pointOfIntersection;
             crosshairs.DetectTargets(ray);
+            if((new Vector2(pointOfIntersection.x, pointOfIntersection.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 1f){
+                gunController.Aim(pointOfIntersection);
+            }
+
+            
         }
 
         //this will work to, but it will only draw the ray when it collides with something, and gives out hitInfo
