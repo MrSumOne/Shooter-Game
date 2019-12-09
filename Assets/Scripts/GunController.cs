@@ -6,12 +6,12 @@ public class GunController : MonoBehaviour {
 
     public Transform gunHolder;
 
-    public Gun startingGun;
+    public Gun[] allGuns;
+
+    Transform weaponTransform;
 
     private void Start()
     {
-        if (startingGun != null)
-            EquipGun(startingGun);
     }
 
     public void EquipGun(Gun gunToEquip)
@@ -20,6 +20,15 @@ public class GunController : MonoBehaviour {
             Destroy(equippedGun.gameObject);
         equippedGun = Instantiate(gunToEquip, gunHolder.position, gunHolder.rotation) as Gun;
         equippedGun.transform.parent = gunHolder;
+        gunHolder.localPosition = gunToEquip.transform.position;
+    }
+
+    public void EquipGun(int weaponIndex)
+    {
+        //I remembered this array loop from the stealth game:
+        //if the index runs out of bound of the array it will start at the beginning, 0
+        weaponIndex = weaponIndex % allGuns.Length;
+        EquipGun(allGuns[weaponIndex]);
     }
 
     public void OnTriggerHold()
