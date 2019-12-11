@@ -666,10 +666,10 @@ MonoBehaviour:
   projectile: {fileID: 114707204351084538, guid: 5776cab80ae1ed145a1aa755b1a5ebab,
     type: 2}
   msBetweenShots: 100
-  muzzleVelocity: 35
+  muzzleVelocity: 40
   burstCount: 5
   projectilesPerMag: 50
-  reloadTime: 0.3
+  reloadTime: 0.6
   kickMinMax: {x: 0.05, y: 0.2}
   recoilAngleMinMax: {x: 3, y: 5}
   recoilMoveSettleTime: 0.1

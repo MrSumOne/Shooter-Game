@@ -923,11 +923,11 @@ MonoBehaviour:
   - {fileID: 4367887901902576}
   projectile: {fileID: 114707204351084538, guid: 5776cab80ae1ed145a1aa755b1a5ebab,
     type: 2}
-  msBetweenShots: 100
+  msBetweenShots: 50
   muzzleVelocity: 35
   burstCount: 3
   projectilesPerMag: 24
-  reloadTime: 0.3
+  reloadTime: 0.4
   kickMinMax: {x: 0.05, y: 0.2}
   recoilAngleMinMax: {x: 3, y: 5}
   recoilMoveSettleTime: 0.1

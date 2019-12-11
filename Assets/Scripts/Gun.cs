@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour {
     public AudioClip shootAudio;
     public AudioClip reloadAudio;
 
-    bool triggerReleasedSinceLastShot;
+    bool triggerReleasedSinceLastShot = true;
     int shotsRemainingInBurst;
     int projectilesRemainingInMag;
     bool isReloading;
@@ -60,6 +60,7 @@ public class Gun : MonoBehaviour {
 
     void Shoot()
     {
+        
         if (!isReloading && Time.time > nextShotTime && projectilesRemainingInMag > 0)
         {
             if(firemode == FireMode.Burst)
@@ -88,8 +89,6 @@ public class Gun : MonoBehaviour {
                 nextShotTime = Time.time + msBetweenShots / 1000;
                 Projectile newProjectile = Instantiate(projectile, projectileSpawn[i].position, projectileSpawn[i].rotation);
                 newProjectile.SetSpeed(muzzleVelocity);
-
-                
             }
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
 
@@ -99,7 +98,7 @@ public class Gun : MonoBehaviour {
             recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
             recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
 
-            AudioManager.instance.playSound(shootAudio, transform.position);
+            AudioManager.instance.PlaySound(shootAudio, transform.position);
         }
     }
 
@@ -108,7 +107,7 @@ public class Gun : MonoBehaviour {
         if (!isReloading && projectilesRemainingInMag != projectilesPerMag)
         {
             StartCoroutine(AnimateReload());
-            AudioManager.instance.playSound(reloadAudio, transform.position);
+            AudioManager.instance.PlaySound(reloadAudio, transform.position);
         }
         
     }

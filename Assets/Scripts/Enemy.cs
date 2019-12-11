@@ -71,7 +71,7 @@ public class Enemy : LivingEntity
 
         startingHealth = enemyHealth;
 
-        enemyMat = GetComponent<Renderer>().sharedMaterial;
+        enemyMat = GetComponent<Renderer>().material;
         enemyMat.color = skinColour;
         originalColor = enemyMat.color;
 
@@ -79,9 +79,15 @@ public class Enemy : LivingEntity
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
+        AudioManager.instance.PlaySound("Impact", transform.position);
         if(damage >= health)
         {
-            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.main.startLifetime.constant);
+            GameObject effect = Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection));
+            Material effectMaterial = effect.GetComponent<Renderer>().material;
+            effectMaterial.color = enemyMat.color;
+            Destroy(effect, deathEffect.main.startLifetime.constant);
+            Destroy(effectMaterial, deathEffect.main.startLifetime.constant);
+            AudioManager.instance.PlaySound("Enemy Death", transform.position);
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }
@@ -106,6 +112,7 @@ public class Enemy : LivingEntity
                 {
                     StartCoroutine(Attack());
                     nextAttackTime = Time.time + timeBetweenAttacks;
+                    AudioManager.instance.PlaySound("Enemy Attack", transform.position);
                 }
             }
         }

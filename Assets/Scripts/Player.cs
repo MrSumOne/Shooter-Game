@@ -35,7 +35,7 @@ public class Player : LivingEntity
         gunController.EquipGun(waveNumber - 1);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         GetPlayerControls();
         //move the player
@@ -96,5 +96,11 @@ public class Player : LivingEntity
         //    Debug.DrawLine(ray.origin, point, Color.red);
         //    heightCorrectedPoint = new Vector3(point.x, transform.position.y, point.z);
         //}
+    }
+
+    public override void Die()
+    {
+        AudioManager.instance.PlaySound("Player Death", transform.position);
+        base.Die();
     }
 }
